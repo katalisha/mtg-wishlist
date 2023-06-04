@@ -8,6 +8,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 
+[tool.pytest.ini_options]
+pythonpath = "src"
+
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 pylint = "^2.17.4"

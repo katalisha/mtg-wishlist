@@ -1,3 +1,9 @@
+# Usage
+`poetry run python src/app.py wishlist.csv`
+
+# Running tests
+`poetry run pytest`
+
 # To run the environment
 1. Download [Docker desktop](https://www.docker.com/products/docker-desktop/)
 2. Download [vscode](https://code.visualstudio.com)
