@@ -7,7 +7,7 @@ from card import Card
 
 
 def test_successful_card_creation():
-    expected_card = Card("Ao, the Dawn Sky", "NEO", "406", "Normal")
+    expected_card = Card("Ao, the Dawn Sky", "Kamigawa: Neon Dynasty", "406", "Normal")
     row = {
         "Quantity": "1",
         "Card Name": "Ao, the Dawn Sky",

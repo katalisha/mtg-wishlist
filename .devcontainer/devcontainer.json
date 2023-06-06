@@ -34,7 +34,7 @@
 				"python.linting.pylintArgs": [
 					"--rcfile=.pylintrc"
 				],
-				"python.analysis.typeCheckingMode": "strict",
+				"python.analysis.typeCheckingMode": "basic",
 				"python.formatting.provider": "black",
 				"[python]": {
 					"editor.defaultFormatter": "ms-python.black-formatter",

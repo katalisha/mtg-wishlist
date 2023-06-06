@@ -1,5 +1,5 @@
 # Usage
-`poetry run python src/app.py wishlist.csv`
+`poetry run python src/main.py wishlist.csv`
 
 # Running tests
 `poetry run pytest`
@@ -22,45 +22,3 @@ Note: if the python extension isn't detected in vscode, you may need to reload t
 Quantity,Card Name,Set Code,Set Name,Card Number,Condition,Printing,Language,LOW,MID,MARKET
 1,"Ao, the Dawn Sky",NEO,Kamigawa: Neon Dynasty,406,NearMint,Normal,English,3.20,5.20,5.02
 1,Golgari Guildgate,GRN,Guilds of Ravnica,248,NearMint,Foil,English,0.44,0.60,0.62
-
-
-https://www.binderpos.com
-
-```
-curl --location 'https://appbeta.binderpos.com/external/shopify/products/forStore' \
---header 'Content-Type: application/json' \
---data '{
-    "storeUrl": "tabernacle-games.myshopify.com",
-    "game": "mtg",
-    "strict": "true",
-    "sortTypes": [
-        {
-            "type": "title",
-            "asc": true,
-            "order": 1
-        }
-    ],
-    "variants": [],
-    "rarities": [],
-    "types": [],
-    "setNames": [],
-    "monsterTypes": [],
-    "colors": [],
-    "title": "breeding pool",
-    "priceGreaterThan": "",
-    "priceLessThan": "",
-    "instockOnly": "true"
-}'
-```
-
-
-https://portal.binderpos.com/external/shopify/products/forStore
-
-{"storeUrl":"plenty-of-games-au.myshopify.com","game":"mtg","strict":null,"sortTypes":[{"type":"price","asc":false,"order":1}],"variants":null,"title":"breedi","priceGreaterThan":0,"priceLessThan":null,"instockOnly":true,"limit":18,"offset":0,"setNames":[],"colors":[],"rarities":[],"types":[]}
-
-
-{"storeUrl":"good-games-townhall.myshopify.com","game":"mtg","strict":"true","sortTypes":[{"type":"price","asc":false,"order":1}],"variants":[],"rarities":[],"types":[],"setNames":[],"monsterTypes":[],"colors":[],"title":"breeding pool","priceGreaterThan":"","priceLessThan":"","instockOnly":"true","limit":24}
-
-
-cherry games is different
-mtgmate is different

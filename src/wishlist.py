@@ -19,6 +19,6 @@ def convert_row_to_card(row: dict[str, str]) -> Card | None:
         else:
             printing = cast(Printing, row["Printing"])
 
-        return Card(row["Card Name"], row["Set Code"], row["Card Number"], printing)
+        return Card(row["Card Name"], row["Set Name"], row["Card Number"], printing)
     except KeyError:
         return None
