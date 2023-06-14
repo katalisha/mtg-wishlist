@@ -42,6 +42,7 @@ class BinderStore(Store):
     """Store details"""
 
     url: str
+    cards: list[StockedCard] = field(default_factory=list)
 
     requests_blocked_until: ClassVar[datetime | None] = None
     binder_url = "https://portal.binderpos.com/external/shopify/products/forStore"
@@ -58,10 +59,21 @@ class BinderStore(Store):
             return Result.ERROR
         else:
             sleep(self.avoid_rate_limit)  # TODO: do this better
-            matches = filter(
-                lambda p: (p.collector_number == card.number), inventory.products
-            )
-            if len(list(matches)) > 0:
+
+            matches = [
+                p for p in inventory.products if p.collector_number == card.number
+            ]
+
+            if len(matches) > 0:
+
+                def get_min_price(min_price: Decimal, product: Product) -> Decimal:
+                    new_min = min(product.variants, key=attrgetter("price")).price
+                    return min(min_price, new_min)
+
+                min_price = reduce(get_min_price, matches, Decimal("inf"))
+
+                stock = StockedCard(card, min_price)
+                self.cards.append(stock)
                 return Result.HAS_CARD
             else:
                 return Result.NO_HAS_CARD
@@ -79,6 +91,9 @@ class BinderStore(Store):
 
             except (KeyError, httpx.HTTPError):
                 return None
+
+    def cards_found(self) -> list[StockedCard]:
+        return self.cards
 
     def build_request_data(self, card: Card) -> dict[str, Any]:
         return {

@@ -5,6 +5,13 @@ from enum import Enum
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
+from decimal import Decimal
+
+
+@dataclass
+class StockedCard:
+    card: Card
+    price: Decimal
 
 
 class Result(Enum):
@@ -15,6 +22,8 @@ class Result(Enum):
 
 @dataclass
 class Store(ABC):
+    """A store that sells cards"""
+
     name: str
 
     @abstractmethod
@@ -23,4 +32,8 @@ class Store(ABC):
 
     @abstractmethod
     def rate_limited_to(self) -> datetime:
+        pass
+
+    @abstractmethod
+    def cards_found(self) -> list[StockedCard]:
         pass

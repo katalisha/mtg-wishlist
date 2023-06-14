@@ -3,6 +3,7 @@
 from store import Store, Result
 from card import Card
 import datetime
+import sys
 
 # ANSI color codes
 BLACK = "\033[0;30m"
@@ -31,28 +32,55 @@ CROSSED = "\033[9m"
 END = "\033[0m"
 
 
-def output_card(card: Card) -> str:
-    return f"{PURPLE}{BOLD}{card.name}{END} {FAINT}({card.set_name}, {card.number}){END}{END}"
+class Outputter:
+    """Manages output strings"""
 
+    def __init__(self, verbose: bool):
+        self.verbose = verbose
 
-def output_store_has_card(store: Store, has_card: Result) -> str:
-    match has_card:
-        case Result.HAS_CARD:
-            return f"{GREEN}\N{check mark} {store.name}{END}"
-        case Result.NO_HAS_CARD:
-            return (
-                f"\N{Multiplication Sign In Double Circle} {CROSSED}{store.name}{END}"
+    def card(self, card: Card):
+        if self.verbose:
+            print(self.card_str(card))
+
+    def card_str(self, card: Card) -> str:
+        return f"{PURPLE}{BOLD}{card.name}{END} {FAINT}({card.set_name}, {card.number}){END}{END}"
+
+    def store_has_card(self, store: Store, has_card: Result):
+        if self.verbose:
+            return self.verbose_store_has_card(store, has_card)
+
+    def verbose_store_has_card(self, store: Store, has_card: Result):
+        match has_card:
+            case Result.HAS_CARD:
+                print(f"{GREEN}\N{check mark} {store.name}{END}")
+            case Result.NO_HAS_CARD:
+                print(
+                    f"\N{Multiplication Sign In Double Circle} {CROSSED}{store.name}{END}"
+                )
+            case Result.ERROR:
+                print(f" \N{Skull and Crossbones} {store.name}")
+
+    def requests_blocked(self, name: str, until: datetime.datetime):
+        diff = until - datetime.datetime.now()
+        if diff > datetime.timedelta(seconds=0):
+            readable_time = round(diff.total_seconds() / 60)
+            message = (
+                f"\N{Skull and Crossbones} {RED}{name}"
+                + f" requests blocked for {readable_time} minutes{END} \N{Skull and Crossbones}"
             )
-        case Result.ERROR:
-            return f" \N{Skull and Crossbones} {store.name}"
+            print(message)
 
+    def shopping_list(self, stores: list[Store]):
+        for store in stores:
+            print(store.name)
+            for stock in store.cards_found():
+                print(self.card_str(stock.card) + f" @ ${stock.price}")
 
-def output_requests_blocked(name: str, until: datetime.datetime) -> str | None:
-    diff = until - datetime.datetime.now()
-    if diff > datetime.timedelta(seconds=0):
-        readable_time = round(diff.total_seconds() / 60)
-        message = (
-            f"\N{Skull and Crossbones} {RED}{name}"
-            + f" requests blocked for {readable_time} minutes{END} \N{Skull and Crossbones}"
-        )
-        return message
+    def progress_bar(self, progress: float):
+        if not self.verbose:
+            bar = "\u2588" * int(progress * 50)
+            percentage = progress * 100
+            sys.stdout.write(f"\rProgress: [{GREEN}{bar:50s}{END}] {percentage:.0f}%")
+
+            if progress >= 1:
+                print()
