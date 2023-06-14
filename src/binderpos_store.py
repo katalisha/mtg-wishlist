@@ -2,14 +2,16 @@
 
 
 from card import Card, Printing
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from dataclasses_json import LetterCase, dataclass_json, config
 from typing import Any, ClassVar
 from decimal import Decimal
 import httpx
 from time import sleep
-from store import Store, Result
+from store import Store, Result, StockedCard
 from datetime import datetime, timedelta
+from functools import reduce
+from operator import attrgetter
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -43,7 +45,7 @@ class BinderStore(Store):
 
     requests_blocked_until: ClassVar[datetime | None] = None
     binder_url = "https://portal.binderpos.com/external/shopify/products/forStore"
-    avoid_rate_limit = 10  # seconds
+    avoid_rate_limit = 4  # seconds
 
     def check(self, card: Card) -> Result:
         if self.rate_limited_to() is not None:
