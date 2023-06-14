@@ -11,7 +11,6 @@ from time import sleep
 from store import Store, Result, StockedCard
 from datetime import datetime, timedelta
 from functools import reduce
-from operator import attrgetter
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -77,7 +76,8 @@ class BinderStore(Store):
             try:
                 response = client.post(self.binder_url, json=data)
                 response.raise_for_status()
-                body: Inventory = Inventory.from_json(response.text)  # type: ignore
+                body: Inventory = Inventory.from_json(response.text, parse_float=Decimal)  # type: ignore
+
                 return body
             except httpx.HTTPStatusError:
                 self.check_for_rate_limiting(response)  # type: ignore
@@ -133,7 +133,7 @@ class BinderStore(Store):
 
     def create_stocked_card(self, products: list[Product], card: Card) -> StockedCard:
         def get_min_price(min_price: Decimal, product: Product) -> Decimal:
-            new_min = min(product.variants, key=attrgetter("price")).price
+            new_min = min(v.price for v in product.variants)
             return min(min_price, new_min)
 
         min_price = reduce(get_min_price, products, Decimal("inf"))

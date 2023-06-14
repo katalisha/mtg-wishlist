@@ -5,6 +5,7 @@ from card import Card
 import datetime
 import sys
 
+
 # ANSI color codes
 BLACK = "\033[0;30m"
 RED = "\033[0;31m"
@@ -72,15 +73,15 @@ class Outputter:
 
     def shopping_list(self, stores: list[Store]):
         for store in stores:
-            print(store.name)
+            total = sum(s.price for s in store.cards_found())
+            print(f"\n{BOLD}{store.name}{END}: ${total:.2f}")
             for stock in store.cards_found():
-                print(self.card_str(stock.card) + f" @ ${stock.price}")
+                print(
+                    f"\N{check mark} {self.card_str(stock.card)} @ ${stock.price:.2f}"
+                )
 
     def progress_bar(self, progress: float):
         if not self.verbose:
             bar = "\u2588" * int(progress * 50)
             percentage = progress * 100
             sys.stdout.write(f"\rProgress: [{GREEN}{bar:50s}{END}] {percentage:.0f}%")
-
-            if progress >= 1:
-                print()
