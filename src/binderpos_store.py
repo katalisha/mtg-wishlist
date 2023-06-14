@@ -52,8 +52,7 @@ class BinderStore(Store):
         if self.rate_limited_to() is not None:
             return Result.ERROR
 
-        data = self.build_request_data(card)
-        inventory = self.send_request(data)
+        inventory = self.get_inventory(card)
 
         if inventory is None:
             return Result.ERROR
@@ -65,20 +64,15 @@ class BinderStore(Store):
             ]
 
             if len(matches) > 0:
-
-                def get_min_price(min_price: Decimal, product: Product) -> Decimal:
-                    new_min = min(product.variants, key=attrgetter("price")).price
-                    return min(min_price, new_min)
-
-                min_price = reduce(get_min_price, matches, Decimal("inf"))
-
-                stock = StockedCard(card, min_price)
+                stock = self.create_stocked_card(matches, card)
                 self.cards.append(stock)
                 return Result.HAS_CARD
             else:
                 return Result.NO_HAS_CARD
 
-    def send_request(self, data) -> Inventory | None:
+    def get_inventory(self, card) -> Inventory | None:
+        data = self.build_request_data(card)
+
         with httpx.Client() as client:
             try:
                 response = client.post(self.binder_url, json=data)
@@ -136,3 +130,12 @@ class BinderStore(Store):
                 "Near Mint",
                 "Lightly Played",
             ]
+
+    def create_stocked_card(self, products: list[Product], card: Card) -> StockedCard:
+        def get_min_price(min_price: Decimal, product: Product) -> Decimal:
+            new_min = min(product.variants, key=attrgetter("price")).price
+            return min(min_price, new_min)
+
+        min_price = reduce(get_min_price, products, Decimal("inf"))
+
+        return StockedCard(card, min_price)
