@@ -10,7 +10,6 @@ import httpx
 from time import sleep
 from store import Store, Result, StockedCard
 from datetime import datetime, timedelta
-from functools import reduce
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -28,6 +27,9 @@ class Product:
     title: str
     collector_number: str
     variants: list[Variant]
+
+    def min_price(self) -> Decimal:
+        return min(v.price for v in self.variants)
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -62,8 +64,8 @@ class BinderStore(Store):
             ]
 
             if len(matches) > 0:
-                stock = self.create_stocked_card(matches, card)
-                self.cards.append(stock)
+                min_price = min(p.min_price() for p in matches)
+                self.cards.append(StockedCard(card, min_price))
                 return Result.HAS_CARD
             else:
                 return Result.NO_HAS_CARD
@@ -126,12 +128,3 @@ class BinderStore(Store):
                 "Near Mint",
                 "Lightly Played",
             ]
-
-    def create_stocked_card(self, products: list[Product], card: Card) -> StockedCard:
-        def get_min_price(min_price: Decimal, product: Product) -> Decimal:
-            new_min = min(v.price for v in product.variants)
-            return min(min_price, new_min)
-
-        min_price = reduce(get_min_price, products, Decimal("inf"))
-
-        return StockedCard(card, min_price)
