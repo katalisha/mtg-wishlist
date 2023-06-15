@@ -3,7 +3,7 @@
 from card import Card
 from enum import Enum
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
 
@@ -25,6 +25,7 @@ class Store(ABC):
     """A store that sells cards"""
 
     name: str
+    cards: list[StockedCard] = field(default_factory=list, init=False)
 
     @abstractmethod
     def check(self, card: Card) -> Result:
@@ -32,8 +33,4 @@ class Store(ABC):
 
     @abstractmethod
     def rate_limited_to(self) -> datetime:
-        pass
-
-    @abstractmethod
-    def cards_found(self) -> list[StockedCard]:
         pass

@@ -2,7 +2,7 @@
 
 
 from card import Card, Printing
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json, config
 from typing import Any, ClassVar
 from decimal import Decimal
@@ -41,7 +41,6 @@ class BinderStore(Store):
     """Store details"""
 
     url: str
-    cards: list[StockedCard] = field(default_factory=list)
 
     requests_blocked_until: ClassVar[datetime | None] = None
     binder_url = "https://portal.binderpos.com/external/shopify/products/forStore"
@@ -77,17 +76,14 @@ class BinderStore(Store):
                 response = client.post(self.binder_url, json=data)
                 response.raise_for_status()
                 body: Inventory = Inventory.from_json(response.text, parse_float=Decimal)  # type: ignore
-
                 return body
+
             except httpx.HTTPStatusError:
                 self.check_for_rate_limiting(response)  # type: ignore
                 return None
 
             except (KeyError, httpx.HTTPError):
                 return None
-
-    def cards_found(self) -> list[StockedCard]:
-        return self.cards
 
     def build_request_data(self, card: Card) -> dict[str, Any]:
         return {

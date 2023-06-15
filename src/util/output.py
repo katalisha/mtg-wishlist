@@ -73,9 +73,9 @@ class Outputter:
 
     def shopping_list(self, stores: list[Store]):
         for store in stores:
-            total = sum(s.price for s in store.cards_found())
+            total = sum(s.price for s in store.cards)
             print(f"\n{BOLD}{store.name}{END}: ${total:.2f}")
-            for stock in store.cards_found():
+            for stock in store.cards:
                 print(
                     f"\N{check mark} {self.card_str(stock.card)} @ ${stock.price:.2f}"
                 )
