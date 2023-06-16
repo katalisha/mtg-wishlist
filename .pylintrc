@@ -259,7 +259,7 @@ generated-members=
 [FORMAT]
 
 # Maximum number of characters on a single line.
-# max-line-length=80 removing as the black formatter resists all attempts to shorten lines
+max-line-length=200 # allow long lines as the black formatter resists all attempts to shorten some lines
 
 # TODO(https://github.com/PyCQA/pylint/issues/3352): Direct pylint to exempt
 # lines made too long by directives to pytype.
