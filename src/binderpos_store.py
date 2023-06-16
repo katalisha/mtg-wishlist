@@ -3,8 +3,8 @@
 
 from card import Card, Printing
 from dataclasses import dataclass
-from dataclasses_json import LetterCase, dataclass_json, config
-from typing import Any, ClassVar
+from dataclasses_json import LetterCase, dataclass_json, config  # type: ignore
+from typing import Any, ClassVar, Optional
 from decimal import Decimal
 import httpx
 from time import sleep
@@ -12,17 +12,17 @@ from store import Store, Result, StockedCard
 from datetime import datetime, timedelta
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass_json(letter_case=LetterCase.CAMEL)  # type: ignore
 @dataclass
 class Variant:
     title: str
     price: Decimal
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass_json(letter_case=LetterCase.CAMEL)  # type: ignore
 @dataclass
 class Product:
-    dataclass_json_config = config(letter_case=LetterCase.CAMEL)
+    dataclass_json_config = config(letter_case=LetterCase.CAMEL)  # type: ignore
     id: str
     title: str
     collector_number: str
@@ -32,7 +32,7 @@ class Product:
         return min(v.price for v in self.variants)
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass_json(letter_case=LetterCase.CAMEL)  # type: ignore
 @dataclass
 class Inventory:
     products: list[Product]
@@ -44,7 +44,7 @@ class BinderStore(Store):
 
     url: str
 
-    requests_blocked_until: ClassVar[datetime | None] = None
+    requests_blocked_until: ClassVar[Optional[datetime]] = None
     binder_url = "https://portal.binderpos.com/external/shopify/products/forStore"
     avoid_rate_limit = 4  # seconds
 
@@ -70,18 +70,17 @@ class BinderStore(Store):
             else:
                 return Result.NO_HAS_CARD
 
-    def get_inventory(self, card) -> Inventory | None:
+    def get_inventory(self, card: Card) -> Optional[Inventory]:
         data = self.build_request_data(card)
 
         with httpx.Client() as client:
             try:
                 response = client.post(self.binder_url, json=data)
                 response.raise_for_status()
-                body: Inventory = Inventory.from_json(response.text, parse_float=Decimal)  # type: ignore
-                return body
+                return Inventory.from_json(response.text, parse_float=Decimal)  # type: ignore # dataclasses_json from_json confuses pylance
 
             except httpx.HTTPStatusError:
-                self.check_for_rate_limiting(response)  # type: ignore
+                self.check_for_rate_limiting(response)  # type: ignore # response is not Unbound when a HTTPStatusError is thrown
                 return None
 
             except (KeyError, httpx.HTTPError):
@@ -113,7 +112,7 @@ class BinderStore(Store):
                     seconds=retry_after
                 )
 
-    def rate_limited_to(self) -> datetime | None:
+    def rate_limited_to(self) -> Optional[datetime]:
         if (
             BinderStore.requests_blocked_until is not None
             and BinderStore.requests_blocked_until > datetime.now()

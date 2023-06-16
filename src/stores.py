@@ -3,13 +3,14 @@
 from util.fileio import process_csv_file
 from store import Store
 from binderpos_store import BinderStore
+from typing import Optional
 
 
 def load_stores(filepath: str) -> list[Store]:
     return process_csv_file(filepath, convert_row_to_store)
 
 
-def convert_row_to_store(row: dict[str, str]) -> Store | None:
+def convert_row_to_store(row: dict[str, str]) -> Optional[Store]:
     if len(row) != 2:
         return None
 

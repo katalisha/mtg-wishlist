@@ -6,6 +6,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
+from typing import Optional
 
 
 @dataclass
@@ -32,5 +33,5 @@ class Store(ABC):
         pass
 
     @abstractmethod
-    def rate_limited_to(self) -> datetime:
+    def rate_limited_to(self) -> Optional[datetime]:
         pass

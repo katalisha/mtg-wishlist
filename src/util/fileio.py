@@ -2,7 +2,7 @@
 
 import csv
 import sys
-from typing import TypeVar, Callable
+from typing import TypeVar, Callable, Optional
 
 T = TypeVar("T")
 
@@ -17,7 +17,7 @@ class FileReport:
 
 def process_csv_file(
     filepath: str,
-    processor: Callable[[dict[str, str]], T | None],
+    processor: Callable[[dict[str, str]], Optional[T]],
     skip_header_lines: int = 0,
 ) -> list[T]:
     result_list: list[T] = []
