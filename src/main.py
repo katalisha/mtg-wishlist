@@ -3,24 +3,20 @@
 from util.cliargs import process_args, Namespace
 from util.output import Outputter
 from wishlist import load_cards
-from store import Store
-from binderpos_store import BinderStore
+from stores import load_stores
+
+# TODO https://www.cherrycollectables.com.au
+# TODO https://www.mtgmate.com.au
 
 
 def main(args: Namespace):
-    wanted_cards = load_cards(args.filepath)
-    stores: list[Store] = [
-        BinderStore("Tabernacle", "tabernacle-games.myshopify.com"),
-        BinderStore("Plenty of Games", "plenty-of-games-au.myshopify.com"),
-        BinderStore("Good Games", "good-games-townhall.myshopify.com"),
-        # https://www.cherrycollectables.com.au
-        # https://www.mtgmate.com.au
-    ]
+    wishlist = load_cards(args.wishlist)
+    stores = load_stores(args.storelist)
 
     output = Outputter(args.verbose)
 
-    for i, card in enumerate(wanted_cards):
-        progress = i / len(wanted_cards)
+    for i, card in enumerate(wishlist):
+        progress = i / len(wishlist)
         output.progress_bar(progress)
 
         output.card(card)

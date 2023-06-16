@@ -9,9 +9,18 @@ def process_args() -> Namespace:
         description="Searches stores for a wishlist of cards",
     )
     parser.add_argument(
-        "filepath",
+        "-w",
+        "--wishlist",
         help="the filepath for the dragon shield wishlist export file",
         type=str,
+        required=True,
+    )
+    parser.add_argument(
+        "-s",
+        "--storelist",
+        help="the filepath for list of stores to search",
+        type=str,
+        required=True,
     )
     parser.add_argument("-v", "--verbose", action="store_true")
 

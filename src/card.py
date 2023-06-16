@@ -8,8 +8,6 @@ Printing = Literal["Normal", "Foil"]
 
 @dataclass
 class Card:
-    """Card details"""
-
     name: str
     set_name: str
     number: str
