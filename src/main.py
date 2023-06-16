@@ -1,7 +1,7 @@
 """ Magic card wishlist checker - lets find those cards 🤑 """
 
-from util.cliargs import process_args, Namespace
-from util.output import Outputter
+from cliargs import process_args, Namespace
+from renderer import Renderer
 from wishlist import load_cards
 from stores import load_stores
 
@@ -12,26 +12,22 @@ from stores import load_stores
 def main(args: Namespace):
     wishlist = load_cards(args.wishlist)
     stores = load_stores(args.storelist)
-
-    output = Outputter(args.verbose)
+    render = Renderer(args.verbose)
+    total_cards = len(wishlist)
 
     for i, card in enumerate(wishlist):
-        progress = i / len(wishlist)
-        output.progress_bar(progress)
+        render.next_card(card, i, total_cards)
 
-        output.card(card)
         for store in stores:
             has_card = store.check(card)
-            output.store_has_card(store, has_card)
+            render.store_has_card(store, has_card)
 
-    output.progress_bar(1)
+    render.done(stores)
 
     for store in stores:
         limit = store.rate_limited_to()
         if limit is not None:
-            output.requests_blocked(store.name, limit)
-
-    output.shopping_list(stores)
+            render.requests_blocked(store.name, limit)
 
 
 # If the main.py file was directly run from the shell, invoke
