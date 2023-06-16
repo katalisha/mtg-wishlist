@@ -1,4 +1,4 @@
-""" Magic card wishlist checker - lets find those cards and go shopping """
+""" Magic card wishlist checker - lets find those cards 🤑 """
 
 from util.cliargs import process_args, Namespace
 from util.output import Outputter

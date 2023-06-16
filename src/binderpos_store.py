@@ -2,39 +2,42 @@
 
 
 from card import Card, Printing
-from dataclasses import dataclass
-from dataclasses_json import LetterCase, dataclass_json, config  # type: ignore
+from pydantic import BaseModel
 from typing import Any, ClassVar, Optional
 from decimal import Decimal
 import httpx
 from time import sleep
 from store import Store, Result, StockedCard
 from datetime import datetime, timedelta
+from dataclasses import dataclass
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)  # type: ignore
-@dataclass
-class Variant:
+def to_camel(string: str) -> str:
+    res = "".join(word.capitalize() for word in string.split("_"))
+    return res[0].lower() + res[1:]
+
+
+class Variant(BaseModel):
     title: str
     price: Decimal
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)  # type: ignore
-@dataclass
-class Product:
-    dataclass_json_config = config(letter_case=LetterCase.CAMEL)  # type: ignore
+class Product(BaseModel):
+    """A product in the store inventory"""
+
     id: str
     title: str
     collector_number: str
     variants: list[Variant]
 
+    class Config:
+        alias_generator = to_camel
+
     def min_price(self) -> Decimal:
         return min(v.price for v in self.variants)
 
 
-@dataclass_json(letter_case=LetterCase.CAMEL)  # type: ignore
-@dataclass
-class Inventory:
+class Inventory(BaseModel):
     products: list[Product]
 
 
@@ -77,7 +80,7 @@ class BinderStore(Store):
             try:
                 response = client.post(self.binder_url, json=data)
                 response.raise_for_status()
-                return Inventory.from_json(response.text, parse_float=Decimal)  # type: ignore # dataclasses_json from_json confuses pylance
+                return Inventory.parse_raw(response.text)
 
             except httpx.HTTPStatusError:
                 self.check_for_rate_limiting(response)  # type: ignore # response is not Unbound when a HTTPStatusError is thrown
