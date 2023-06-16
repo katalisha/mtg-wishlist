@@ -1,5 +1,5 @@
 # Usage
-`poetry run python src/main.py wishlist.csv`
+`poetry run python src/main.py -w wishlist.csv -s stores.csv`
 
 # Running tests
 `poetry run pytest`
@@ -22,3 +22,9 @@ Note: if the python extension isn't detected in vscode, you may need to reload t
 Quantity,Card Name,Set Code,Set Name,Card Number,Condition,Printing,Language,LOW,MID,MARKET
 1,"Ao, the Dawn Sky",NEO,Kamigawa: Neon Dynasty,406,NearMint,Normal,English,3.20,5.20,5.02
 1,Golgari Guildgate,GRN,Guilds of Ravnica,248,NearMint,Foil,English,0.44,0.60,0.62
+
+## store csv format
+Name,URL
+"Tabernacle","tabernacle-games.myshopify.com"
+"Plenty of Games","plenty-of-games-au.myshopify.com"
+"Good Games","good-games-townhall.myshopify.com"
