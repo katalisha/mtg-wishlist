@@ -10,11 +10,7 @@ from time import sleep
 from store import Store, Result, StockedCard
 from datetime import datetime, timedelta
 from dataclasses import dataclass
-
-
-def to_camel(string: str) -> str:
-    res = "".join(word.capitalize() for word in string.split("_"))
-    return res[0].lower() + res[1:]
+from util.string import snake_to_camel
 
 
 class Variant(BaseModel):
@@ -31,7 +27,7 @@ class Product(BaseModel):
     variants: list[Variant]
 
     class Config:
-        alias_generator = to_camel
+        alias_generator = snake_to_camel
 
     def min_price(self) -> Decimal:
         return min(v.price for v in self.variants)
