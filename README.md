@@ -1,3 +1,7 @@
+This is an app for automating the task of searching stores for hard to find Magic the Gathering cards (and also the project I am using to learn python).
+It is a cli program that takes an exported [dragonshield](https://mtg.dragonshield.com) wishlist and a list of stores and searches each store for the wishlist cards.
+It runs in a dev container but now it's probably easier to run locally using poetry.
+
 # Usage
 `poetry run python src/main.py -w wishlist.csv -s stores.csv`
 
@@ -24,6 +28,7 @@ Quantity,Card Name,Set Code,Set Name,Card Number,Condition,Printing,Language,LOW
 1,Golgari Guildgate,GRN,Guilds of Ravnica,248,NearMint,Foil,English,0.44,0.60,0.62
 
 ## store csv format
+Currenlty only stores using binderpos are supported
 Name,URL
 "Tabernacle","tabernacle-games.myshopify.com"
 "Plenty of Games","plenty-of-games-au.myshopify.com"
