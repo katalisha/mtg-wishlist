@@ -2,8 +2,8 @@
 Test wishlist methods
 """
 
-from wishlist import convert_row_to_card
-from card import Card
+from cards.wishlist import convert_row_to_card
+from cards.card import Card
 
 
 def test_successful_card_creation():
