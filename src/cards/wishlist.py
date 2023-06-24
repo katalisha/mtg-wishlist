@@ -21,6 +21,7 @@ def convert_row_to_card(row: dict[str, str]) -> Optional[Card]:
 
         return Card(
             row["Card Name"],
+            row["Set Code"],
             row["Set Name"],
             row["Card Number"],
             printing,
