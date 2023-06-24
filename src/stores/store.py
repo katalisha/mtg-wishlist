@@ -1,6 +1,6 @@
 """ a store that sells magic cards """
 
-from card import Card
+from cards.card import Card
 from enum import Enum
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field

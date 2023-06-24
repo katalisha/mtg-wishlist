@@ -1,7 +1,7 @@
 """ convert the wishlist to a list of cards"""
 
 from util.fileio import process_csv_file
-from card import Card, Printing
+from cards.card import Card, Printing
 from typing import cast, get_args, Optional
 
 
@@ -19,6 +19,11 @@ def convert_row_to_card(row: dict[str, str]) -> Optional[Card]:
         else:
             printing = cast(Printing, row["Printing"])
 
-        return Card(row["Card Name"], row["Set Name"], row["Card Number"], printing)
+        return Card(
+            row["Card Name"],
+            row["Set Name"],
+            row["Card Number"],
+            printing,
+        )
     except KeyError:
         return None

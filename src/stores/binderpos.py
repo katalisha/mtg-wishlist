@@ -1,13 +1,13 @@
 """ A Store hosted on binderpos.com """
 
 
-from card import Card, Printing
+from cards.card import Card, Printing
 from pydantic import BaseModel
 from typing import Any, ClassVar, Optional
 from decimal import Decimal
 import httpx
 from time import sleep
-from store import Store, Result, StockedCard
+from stores.store import Store, Result, StockedCard
 from datetime import datetime, timedelta
 from dataclasses import dataclass
 from util.string import snake_to_camel

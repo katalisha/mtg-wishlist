@@ -2,8 +2,8 @@
 
 from cliargs import process_args, Namespace
 from renderer import Renderer
-from wishlist import load_cards
-from stores import load_stores
+from cards.wishlist import load_cards
+from stores.store_list import load_stores
 
 # TODO https://www.cherrycollectables.com.au
 # TODO https://www.mtgmate.com.au

@@ -1,7 +1,7 @@
 """ output stuff to the command line """
 
-from store import Store, Result
-from card import Card
+from stores.store import Store, Result
+from cards.card import Card
 import datetime
 import sys
 from util.cli_style import PURPLE, BOLD, END, FAINT, CROSSED, GREEN, RED

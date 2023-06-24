@@ -1,8 +1,8 @@
 """ convert the csv file of stores to a list of stores"""
 
 from util.fileio import process_csv_file
-from store import Store
-from binderpos_store import BinderStore
+from stores.store import Store
+from stores.binderpos import BinderStore
 from typing import Optional
 
 
