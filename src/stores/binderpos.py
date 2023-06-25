@@ -1,4 +1,4 @@
-""" A Store hosted on binderpos.com """
+""" A Store hosted on binderpos.com and the json models required to interact with the API """
 
 
 from cards.card import Card, Printing
@@ -39,7 +39,7 @@ class Inventory(BaseModel):
 
 @dataclass
 class BinderStore(Store):
-    """Store details"""
+    """A Store subclass using the binderpos.com API"""
 
     url: str
 

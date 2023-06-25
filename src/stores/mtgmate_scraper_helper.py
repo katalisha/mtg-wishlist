@@ -1,4 +1,4 @@
-""" MTG Mate Scraper """
+""" MTG Mate Scraper Helper """
 from cards.card import Card
 from decimal import Decimal
 from lxml import html
@@ -7,7 +7,7 @@ from stores.scraper_helper import ScraperHelper
 
 
 class MtgMateScraperHelper(ScraperHelper):
-    """scraper details for MTG Mate"""
+    """Scraper helper for scraping mtgmate.com"""
 
     def url(self, card: Card) -> str:
         url_name = card.name.replace(" ", "_")

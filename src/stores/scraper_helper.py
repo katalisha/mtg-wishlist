@@ -6,7 +6,7 @@ from decimal import Decimal
 
 
 class ScraperHelper(ABC):
-    """scraper details for MTG Mate"""
+    """abstract scraper helper for customising the scraper class"""
 
     @abstractmethod
     def url(self, card: Card) -> str:

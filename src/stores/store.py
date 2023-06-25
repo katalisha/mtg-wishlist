@@ -20,7 +20,7 @@ class StockedCard:
 
 @dataclass
 class Store(ABC):
-    """A store that sells cards"""
+    """Abstract class for stores that sell cards"""
 
     name: str
     cards: list[StockedCard] = field(default_factory=list, init=False)

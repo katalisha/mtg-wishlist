@@ -8,6 +8,7 @@ from stores.store import CardSearchFailure
 
 # TODO https://www.cherrycollectables.com.au
 # TODO try mypy
+# TODO linter docstring rules is leading to duplication for files that contain a single class
 
 
 def main(args: Namespace):
@@ -15,7 +16,7 @@ def main(args: Namespace):
     stores = load_stores(args.storelist)
     render = Renderer(args.verbose)
     total_cards = len(wishlist)
-    errors: bool = False
+    has_errors: bool = False
 
     for i, card in enumerate(wishlist):
         render.next_card(card, i, total_cards)
@@ -25,7 +26,7 @@ def main(args: Namespace):
                 has_card = store.search_for_card(card)
                 render.card_search_result(store, has_card)
             except CardSearchFailure as exc:
-                errors = True
+                has_errors = True
                 render.card_search_error(store.name, str(exc.__cause__.__class__))
 
     render.done(stores)
@@ -35,7 +36,7 @@ def main(args: Namespace):
         if limit is not None:
             render.requests_blocked(store.name, limit)
 
-    if errors:
+    if has_errors:
         print("there were some errors use --verbose to see details")
 
 

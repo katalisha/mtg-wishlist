@@ -1,4 +1,4 @@
-""" convert the wishlist to a list of cards"""
+""" convert the wishlist csv to a list of Cards"""
 
 from util.fileio import process_csv_file
 from cards.card import Card, Printing
