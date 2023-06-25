@@ -29,9 +29,6 @@ class Product(BaseModel):
     class Config:
         alias_generator = snake_to_camel
 
-    def min_price(self) -> Decimal:
-        return min(v.price for v in self.variants)
-
 
 class Inventory(BaseModel):
     products: list[Product]
@@ -58,12 +55,14 @@ class BinderStore(Store):
         else:
             sleep(self.avoid_rate_limit)  # TODO: do this better
 
-            matches = [
-                p for p in inventory.products if p.collector_number == card.number
+            matching_prices = [
+                min([v.price for v in p.variants])
+                for p in inventory.products
+                if p.collector_number == card.number
             ]
 
-            if len(matches) > 0:
-                min_price = min(p.min_price() for p in matches)
+            if len(matching_prices) > 0:
+                min_price = min(matching_prices)
                 return StockedCard(card, min_price)
 
     def get_inventory(self, card: Card) -> Optional[Inventory]:
@@ -120,7 +119,4 @@ class BinderStore(Store):
         if printing == "Foil":
             return ["Near Mint Foil"]
         else:
-            return [
-                "Near Mint",
-                "Lightly Played",
-            ]
+            return ["Near Mint"]
