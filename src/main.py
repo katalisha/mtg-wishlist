@@ -7,7 +7,7 @@ from stores.store_list import load_stores
 from stores.store import CardSearchFailure
 
 # TODO https://www.cherrycollectables.com.au
-# TODO https://www.mtgmate.com.au
+# TODO try mypy
 
 
 def main(args: Namespace):
