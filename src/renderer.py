@@ -1,6 +1,6 @@
 """ output stuff to the command line """
 
-from stores.store import Store, Result
+from stores.store import Store
 from cards.card import Card
 import datetime
 import sys
@@ -29,17 +29,14 @@ class Renderer:
     def card_str(self, card: Card) -> str:
         return f"{PURPLE}{BOLD}{card.name}{END} {FAINT}({card.set_name}, {card.number}){END}{END}"
 
-    def store_has_card(self, store: Store, has_card: Result):
+    def card_search_result(self, store: Store, has_card: bool):
         if self.verbose:
-            match has_card:
-                case Result.HAS_CARD:
-                    print(f"{GREEN}\N{check mark} {store.name}{END}")
-                case Result.NO_HAS_CARD:
-                    print(
-                        f"\N{Multiplication Sign In Double Circle} {CROSSED}{store.name}{END}"
-                    )
-                case Result.ERROR:
-                    print(f" \N{Skull and Crossbones} {store.name}")
+            if has_card:
+                print(f"{GREEN}\N{check mark} {store.name}{END}")
+            else:
+                print(
+                    f"\N{Multiplication Sign In Double Circle} {CROSSED}{store.name}{END}"
+                )
 
     def progress_update(self, progress: float):
         if not self.verbose:
@@ -65,3 +62,7 @@ class Renderer:
                 + f" requests blocked for {readable_time} minutes{END} \N{Skull and Crossbones}"
             )
             print(message)
+
+    def card_search_error(self, store_name: str, err: str):
+        if self.verbose:
+            print(f" \N{Skull and Crossbones} {store_name} {FAINT}({err}){END}")

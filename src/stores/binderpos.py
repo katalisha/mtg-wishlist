@@ -7,7 +7,7 @@ from typing import Any, ClassVar, Optional
 from decimal import Decimal
 import httpx
 from time import sleep
-from stores.store import Store, Result, StockedCard
+from stores.store import Store, StockedCard, CardSearchFailure
 from datetime import datetime, timedelta
 from dataclasses import dataclass
 from util.string import snake_to_camel
@@ -47,14 +47,14 @@ class BinderStore(Store):
     binder_url = "https://portal.binderpos.com/external/shopify/products/forStore"
     avoid_rate_limit = 4  # seconds
 
-    def check(self, card: Card) -> Result:
+    def perform_search_for_card(self, card: Card) -> Optional[StockedCard]:
         if self.rate_limited_to() is not None:
-            return Result.ERROR
+            raise CardSearchFailure
 
         inventory = self.get_inventory(card)
 
         if inventory is None:
-            return Result.ERROR
+            return None
         else:
             sleep(self.avoid_rate_limit)  # TODO: do this better
 
@@ -64,10 +64,7 @@ class BinderStore(Store):
 
             if len(matches) > 0:
                 min_price = min(p.min_price() for p in matches)
-                self.cards.append(StockedCard(card, min_price))
-                return Result.HAS_CARD
-            else:
-                return Result.NO_HAS_CARD
+                return StockedCard(card, min_price)
 
     def get_inventory(self, card: Card) -> Optional[Inventory]:
         data = self.build_request_data(card)
@@ -78,12 +75,13 @@ class BinderStore(Store):
                 response.raise_for_status()
                 return Inventory.parse_raw(response.text)
 
-            except httpx.HTTPStatusError:
-                self.check_for_rate_limiting(response)  # type: ignore # response is not Unbound when a HTTPStatusError is thrown
-                return None
+            except httpx.HTTPStatusError as exc:
+                if exc.response.status_code == 429:
+                    self.handle_rate_limit(exc.response)
+                raise CardSearchFailure from exc
 
-            except (KeyError, httpx.HTTPError):
-                return None
+            except httpx.HTTPError as exc:
+                raise CardSearchFailure from exc
 
     def build_request_data(self, card: Card) -> dict[str, Any]:
         return {
@@ -103,7 +101,7 @@ class BinderStore(Store):
             "instockOnly": "true",
         }
 
-    def check_for_rate_limiting(self, response: httpx.Response):
+    def handle_rate_limit(self, response: httpx.Response):
         if response.status_code == 429:
             retry_after = int(response.headers["Retry-After"])
             if retry_after != 0:

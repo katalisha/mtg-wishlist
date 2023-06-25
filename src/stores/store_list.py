@@ -3,7 +3,9 @@
 from util.fileio import process_csv_file
 from stores.store import Store
 from stores.binderpos import BinderStore
+from stores.scraper import Scraper
 from typing import Optional
+from stores.mtgmate_scraper_helper import MtgMateScraperHelper
 
 
 def load_stores(filepath: str) -> list[Store]:
@@ -15,6 +17,9 @@ def convert_row_to_store(row: dict[str, str]) -> Optional[Store]:
         return None
 
     try:
-        return BinderStore(row["Name"], row["URL"])
+        if row["URL"] == "www.mtgmate.com.au":
+            return Scraper(row["Name"], MtgMateScraperHelper())
+        else:
+            return BinderStore(row["Name"], row["URL"])
     except KeyError:
         return None
