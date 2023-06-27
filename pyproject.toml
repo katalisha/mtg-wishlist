@@ -10,7 +10,6 @@ python = "^3.11"
 httpx = "^0.24.1"
 pydantic = "^1.10.9"
 lxml = "^4.9.2"
-lxml-stubs = "^0.4.0"
 
 [tool.pytest.ini_options]
 pythonpath = "src"
@@ -19,6 +18,7 @@ pythonpath = "src"
 black = "^23.3.0"
 pylint = "^2.17.4"
 pytest = "^7.3.1"
+lxml-stubs = "^0.4.0"
 
 [build-system]
 requires = ["poetry-core"]
