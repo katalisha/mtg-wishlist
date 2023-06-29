@@ -30,6 +30,6 @@ Quantity,Card Name,Set Code,Set Name,Card Number,Condition,Printing,Language,LOW
 ## store csv format
 Currenlty only stores using binderpos are supported
 Name,URL
-"Tabernacle","tabernacle-games.myshopify.com"
-"Plenty of Games","plenty-of-games-au.myshopify.com"
-"Good Games","good-games-townhall.myshopify.com"
+"Tabernacle","https://tabernacle-games.myshopify.com"
+"Plenty of Games","https://plenty-of-games-au.myshopify.com"
+"Good Games","https://good-games-townhall.myshopify.com"

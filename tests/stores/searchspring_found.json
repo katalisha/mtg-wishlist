@@ -1,0 +1,287 @@
+{
+    "pagination": {
+        "totalResults": 2,
+        "begin": 1,
+        "end": 2,
+        "currentPage": 1,
+        "totalPages": 1,
+        "previousPage": 0,
+        "nextPage": 0,
+        "perPage": 30,
+        "defaultPerPage": 30
+    },
+    "sorting": {
+        "options": [
+            {
+                "field": "relevance",
+                "direction": "desc",
+                "label": "Best Match"
+            },
+            {
+                "field": "ss_days_since_created",
+                "direction": "asc",
+                "label": "Newest"
+            },
+            {
+                "field": "title",
+                "direction": "asc",
+                "label": "Name: A - Z"
+            },
+            {
+                "field": "title",
+                "direction": "desc",
+                "label": "Name: Z - A"
+            },
+            {
+                "field": "ss_price",
+                "direction": "asc",
+                "label": "Price: Low to High"
+            },
+            {
+                "field": "ss_price",
+                "direction": "desc",
+                "label": "Price: High to Low"
+            }
+        ]
+    },
+    "resultLayout": "grid",
+    "results": [
+        {
+            "brand": "Magic: The Gathering",
+            "collection_handle": [
+                "all",
+                "foil",
+                "gaming-singles",
+                "in-stock",
+                "kamigawa-neon-dynasty",
+                "latest-singles",
+                "magic-the-gathering-singles",
+                "single",
+                "singles",
+                "stock-not-including-pre-orders",
+                "under-5",
+                "under-99"
+            ],
+            "handle": "foil-showcase-hidetsugu-devouring-chaos-378-kamigawa-neon-dynasty",
+            "id": "8acf1fd6f40866643e006972dcfe136b",
+            "image": "https://cdn.shopify.com/s/files/1/0263/9009/products/3981fc94-efb5-4256-8adb-4538515a085c_8a7c5527-842d-4bbf-9f84-8978fdffcd6d.jpg?v=1644990286",
+            "imageUrl": "https://cdn.shopify.com/s/files/1/0263/9009/products/3981fc94-efb5-4256-8adb-4538515a085c_8a7c5527-842d-4bbf-9f84-8978fdffcd6d_600x600.jpg?v=1644990286",
+            "intellisuggestData": "eJzKLjTIyMtjYDA2t1DwTszNTE8sT7RS8EvNz1NwqcxLLC6pZGAwZDBkMGAwYkgvykwBBAAA__9dlA2V",
+            "intellisuggestSignature": "2e72c83da77a8ba79f5285207e90fe875fa64a890595cf50fcd57bac4cc133e5",
+            "msrp": "0",
+            "name": "FOIL SHOWCASE Hidetsugu, Devouring Chaos 378 -  Kamigawa Neon Dynasty",
+            "price": "1.99",
+            "product_type_unigram": "hidetsugu",
+            "ss_available": "1",
+            "ss_image": "https://cdn.shopify.com/s/files/1/0263/9009/products/3981fc94-efb5-4256-8adb-4538515a085c_8a7c5527-842d-4bbf-9f84-8978fdffcd6d_600x600.jpg?v=1644990286",
+            "ss_instock_pct": "100",
+            "ss_price": "1.99",
+            "ss_retail": "0",
+            "ss_tags": [
+                "availability_instock",
+                "collection_kamigawa:neondynasty",
+                "foil",
+                "instock",
+                "kamigawaneondynasty",
+                "magicthegatheringsingles",
+                "rarity_foil",
+                "single",
+                "under5"
+            ],
+            "ss_variants": "[{&quot;id&quot;:39901621059638,&quot;title&quot;:&quot;Default Title&quot;,&quot;price&quot;:&quot;1.99&quot;,&quot;inventory_quantity&quot;:3}]",
+            "thumbnailImageUrl": "https://cdn.shopify.com/s/files/1/0263/9009/products/3981fc94-efb5-4256-8adb-4538515a085c_8a7c5527-842d-4bbf-9f84-8978fdffcd6d_600x600.jpg?v=1644990286",
+            "uid": "6683270840374",
+            "url": "/products/foil-showcase-hidetsugu-devouring-chaos-378-kamigawa-neon-dynasty",
+            "variant_id": [
+                "39901621059638"
+            ],
+            "variant_inventory_quantity": "3",
+            "variant_price": [
+                "1.99"
+            ],
+            "variant_title": [
+                "Default Title"
+            ],
+            "variants": "[{&quot;id&quot;:39901621059638,&quot;product_id&quot;:6683270840374,&quot;title&quot;:&quot;Default Title&quot;,&quot;price&quot;:&quot;1.99&quot;,&quot;sku&quot;:null,&quot;position&quot;:1,&quot;inventory_policy&quot;:&quot;deny&quot;,&quot;compare_at_price&quot;:null,&quot;fulfillment_service&quot;:&quot;manual&quot;,&quot;inventory_management&quot;:&quot;shopify&quot;,&quot;option1&quot;:&quot;Default Title&quot;,&quot;option2&quot;:null,&quot;option3&quot;:null,&quot;created_at&quot;:&quot;2022-02-16T16:44:46+11:00&quot;,&quot;updated_at&quot;:&quot;2022-06-29T19:46:01+10:00&quot;,&quot;taxable&quot;:true,&quot;barcode&quot;:null,&quot;grams&quot;:20,&quot;image_id&quot;:null,&quot;weight&quot;:0.02,&quot;weight_unit&quot;:&quot;kg&quot;,&quot;inventory_item_id&quot;:41997551206454,&quot;inventory_quantity&quot;:3,&quot;old_inventory_quantity&quot;:3,&quot;requires_shipping&quot;:true,&quot;admin_graphql_api_id&quot;:&quot;gid:\/\/shopify\/ProductVariant\/39901621059638&quot;}]"
+        },
+        {
+            "brand": "Magic: The Gathering",
+            "collection_handle": [
+                "all",
+                "gaming-singles",
+                "in-stock",
+                "kamigawa-neon-dynasty",
+                "latest-singles",
+                "magic-the-gathering-singles",
+                "single",
+                "singles",
+                "stock-not-including-pre-orders",
+                "under-5",
+                "under-99"
+            ],
+            "handle": "showcase-hidetsugu-devouring-chaos-378-kamigawa-neon-dynasty",
+            "id": "cc38c096c7ae5cc7973792bd1c59fb18",
+            "image": "https://cdn.shopify.com/s/files/1/0263/9009/products/3981fc94-efb5-4256-8adb-4538515a085c.jpg?v=1644989954",
+            "imageUrl": "https://cdn.shopify.com/s/files/1/0263/9009/products/3981fc94-efb5-4256-8adb-4538515a085c_600x600.jpg?v=1644989954",
+            "intellisuggestData": "eJzKLjTIyMtjYDA2t1DwTszNTE8sT7RS8EvNz1NwqcxLLC6pZGAwZDBiMGAwYkgvykwBBAAA__9dng2W",
+            "intellisuggestSignature": "7e0dd7b84a40ca008857878ca01162aa21e767a74d0eb618e118e1f569d32ea2",
+            "msrp": "0",
+            "name": "SHOWCASE Hidetsugu, Devouring Chaos 378 -  Kamigawa Neon Dynasty",
+            "price": "0.99",
+            "product_type_unigram": "hidetsugu",
+            "ss_available": "1",
+            "ss_image": "https://cdn.shopify.com/s/files/1/0263/9009/products/3981fc94-efb5-4256-8adb-4538515a085c_600x600.jpg?v=1644989954",
+            "ss_instock_pct": "100",
+            "ss_price": "0.99",
+            "ss_retail": "0",
+            "ss_tags": [
+                "availability_instock",
+                "collection_kamigawa:neondynasty",
+                "instock",
+                "kamigawaneondynasty",
+                "magicthegatheringsingles",
+                "single",
+                "under5"
+            ],
+            "ss_variants": "[{&quot;id&quot;:39901610934326,&quot;title&quot;:&quot;Default Title&quot;,&quot;price&quot;:&quot;0.99&quot;,&quot;inventory_quantity&quot;:4}]",
+            "thumbnailImageUrl": "https://cdn.shopify.com/s/files/1/0263/9009/products/3981fc94-efb5-4256-8adb-4538515a085c_600x600.jpg?v=1644989954",
+            "uid": "6683261403190",
+            "url": "/products/showcase-hidetsugu-devouring-chaos-378-kamigawa-neon-dynasty",
+            "variant_id": [
+                "39901610934326"
+            ],
+            "variant_inventory_quantity": "4",
+            "variant_price": [
+                "0.99"
+            ],
+            "variant_title": [
+                "Default Title"
+            ],
+            "variants": "[{&quot;id&quot;:39901610934326,&quot;product_id&quot;:6683261403190,&quot;title&quot;:&quot;Default Title&quot;,&quot;price&quot;:&quot;0.99&quot;,&quot;sku&quot;:null,&quot;position&quot;:1,&quot;inventory_policy&quot;:&quot;deny&quot;,&quot;compare_at_price&quot;:null,&quot;fulfillment_service&quot;:&quot;manual&quot;,&quot;inventory_management&quot;:&quot;shopify&quot;,&quot;option1&quot;:&quot;Default Title&quot;,&quot;option2&quot;:null,&quot;option3&quot;:null,&quot;created_at&quot;:&quot;2022-02-16T16:39:14+11:00&quot;,&quot;updated_at&quot;:&quot;2023-06-27T09:40:41+10:00&quot;,&quot;taxable&quot;:true,&quot;barcode&quot;:null,&quot;grams&quot;:20,&quot;image_id&quot;:null,&quot;weight&quot;:0.02,&quot;weight_unit&quot;:&quot;kg&quot;,&quot;inventory_item_id&quot;:41997541081142,&quot;inventory_quantity&quot;:4,&quot;old_inventory_quantity&quot;:4,&quot;requires_shipping&quot;:true,&quot;admin_graphql_api_id&quot;:&quot;gid:\/\/shopify\/ProductVariant\/39901610934326&quot;}]"
+        }
+    ],
+    "facets": [
+        {
+            "field": "tags_collection",
+            "label": "Collection",
+            "type": null,
+            "multiple": "multiple-union",
+            "collapse": 0,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Kamigawa",
+                    "label": "Kamigawa",
+                    "count": 2
+                }
+            ]
+        },
+        {
+            "field": "product_type",
+            "label": "Product Type",
+            "type": null,
+            "multiple": "multiple-union",
+            "collapse": 1,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Singles",
+                    "label": "Singles",
+                    "count": 2
+                }
+            ]
+        },
+        {
+            "field": "tags_rarity",
+            "label": "Rarity",
+            "type": null,
+            "multiple": "multiple-union",
+            "collapse": 1,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "Foil",
+                    "label": "Foil",
+                    "count": 1
+                }
+            ]
+        },
+        {
+            "field": "tags_availability",
+            "label": "Availability",
+            "type": null,
+            "multiple": "multiple-union",
+            "collapse": 1,
+            "facet_active": 0,
+            "values": [
+                {
+                    "active": false,
+                    "type": "value",
+                    "value": "In Stock",
+                    "label": "In Stock",
+                    "count": 2
+                }
+            ]
+        },
+        {
+            "field": "ss_price",
+            "label": "Price",
+            "type": "slider",
+            "multiple": "multiple-union",
+            "collapse": 1,
+            "step": 0.25,
+            "facet_active": 0,
+            "active": [
+                0.75,
+                2
+            ],
+            "range": [
+                0.75,
+                2
+            ],
+            "values": [],
+            "format": "$%01.2f - $%01.2f"
+        }
+    ],
+    "breadcrumbs": [
+        {
+            "field": "",
+            "label": "Search: \"378 Kamigawa: Neon Dynasty\"",
+            "filterLabel": "Search",
+            "filterValue": "378 Kamigawa: Neon Dynasty",
+            "removeFilters": [],
+            "removeRefineQuery": []
+        }
+    ],
+    "filterSummary": [],
+    "merchandising": {
+        "redirect": "",
+        "is_elevated": [],
+        "elevated": [],
+        "removed": [],
+        "content": {},
+        "facets": [],
+        "facetsHide": [],
+        "experiments": [],
+        "variants": [],
+        "personalized": false,
+        "triggeredCampaigns": [
+            {
+                "id": "248871",
+                "title": "MTG singles $$$-->$",
+                "type": "filter"
+            },
+            {
+                "id": "246113",
+                "title": "Global Campaign",
+                "type": "global"
+            }
+        ]
+    }
+}
