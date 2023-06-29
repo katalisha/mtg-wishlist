@@ -49,12 +49,11 @@ class BinderStore(Store):
             raise CardSearchFailure
 
         inventory = self.get_inventory(card)
+        sleep(self.avoid_rate_limit)  # TODO: do this better
 
         if inventory is None:
             return None
         else:
-            sleep(self.avoid_rate_limit)  # TODO: do this better
-
             matching_prices = [
                 min([v.price for v in p.variants])
                 for p in inventory.products
