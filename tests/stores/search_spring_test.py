@@ -1,4 +1,5 @@
 """ test search_string store """
+
 from stores.search_spring import Inventory, Product, SearchSpringStore
 import pathlib
 from decimal import Decimal
@@ -66,7 +67,8 @@ def test_build_request():
     result = store.build_request_params(card)
     assert result == {
         "siteId": "kq0hnn",
-        "bgfilter.collection_handle": "magic-the-gathering-singles",
+        "bgfilter.collection_handle": ["magic-the-gathering-singles", "in-stock"],
+        "filter.collection_handle": "kamigawa-neon-dynasty",
         "resultsFormat": "native",
-        "q": "361 Kamigawa: Neon Dynasty",
+        "q": "Hidetsugu Consumes All",
     }

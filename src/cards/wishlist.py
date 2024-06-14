@@ -15,7 +15,7 @@ def convert_row_to_card(row: dict[str, str]) -> Optional[Card]:
 
     try:
         if row["Printing"] not in get_args(Printing):
-            return None
+            printing = ""
         else:
             printing = cast(Printing, row["Printing"])
 

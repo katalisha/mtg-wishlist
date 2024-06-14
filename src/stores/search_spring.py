@@ -9,6 +9,7 @@ from stores.store import Store, StockedCard, CardSearchFailure
 from datetime import datetime
 from dataclasses import dataclass, field
 from urllib.parse import urlparse
+import re
 
 
 class Product(BaseModel):
@@ -50,8 +51,9 @@ class SearchSpringStore(Store):
     def build_request_params(self, card: Card) -> dict[str, Any]:
         return {
             "siteId": self.site_id,
-            "bgfilter.collection_handle": "magic-the-gathering-singles",
-            "q": f"{card.number} {card.set_name}",
+            "bgfilter.collection_handle": ["magic-the-gathering-singles", "in-stock"],
+            "filter.collection_handle": re.sub("\W+", "-", card.set_name.casefold()),
+            "q": f"{card.name}",
             "resultsFormat": "native",
         }
 
@@ -76,16 +78,22 @@ class SearchSpringStore(Store):
         def is_foil_product(product: Product) -> bool:
             return product.collection_handle.count("foil") > 0
 
+        def product_matches_number(product: Product, card: Card) -> bool:
+            return product.name.find(f"{card.number}") != -1
+
         def product_matches_printing(product: Product, card: Card) -> bool:
-            return (
-                (card.printing == "Foil")
-                if (is_foil_product(product))
-                else (card.printing == "Normal")
-            )
+            if card.printing == "Foil" and is_foil_product(product):
+                return True
+            elif card.printing != "Foil":
+                return True
+            else:
+                return False
 
         try:
             min_price = min(
-                p.price for p in inventory.products if product_matches_printing(p, card)
+                p.price
+                for p in inventory.products
+                if product_matches_number(p, card) and product_matches_printing(p, card)
             )
             return StockedCard(card, min_price)
         except ValueError:

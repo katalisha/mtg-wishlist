@@ -27,7 +27,7 @@ def test_successful_card_creation():
     assert card.__dict__ == expected_card.__dict__
 
 
-def test_unknown_printing_returns_none():
+def test_unknown_printing_returns_empty_string():
     row = {
         "Quantity": "1",
         "Card Name": "Ao, the Dawn Sky",
@@ -42,7 +42,7 @@ def test_unknown_printing_returns_none():
         "MARKET": "5.02",
     }
     card = convert_row_to_card(row)
-    assert card is None
+    assert card.printing == ""
 
 
 def test_missing_field_returns_none():
