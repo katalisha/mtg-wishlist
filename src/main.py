@@ -1,4 +1,4 @@
-""" Magic card wishlist checker - lets find those cards 🤑 """
+"""Magic card wishlist checker - lets find those cards 🤑"""
 
 from cliargs import process_args, Namespace
 from renderer import Renderer
@@ -27,7 +27,7 @@ def main(args: Namespace):
                 render.card_search_result(store, has_card)
             except CardSearchFailure as exc:
                 has_errors = True
-                render.card_search_error(store.name, str(exc.__cause__.__class__))
+                render.card_search_error(store.name, str(exc.__cause__))
 
     render.done(stores)
 

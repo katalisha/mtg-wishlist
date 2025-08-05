@@ -1,6 +1,5 @@
 """ A Store hosted on binderpos.com and the json models required to interact with the API """
 
-
 from cards.card import Card, Printing
 from pydantic import BaseModel
 from typing import Any, ClassVar, Optional
@@ -23,7 +22,7 @@ class Product(BaseModel):
 
     id: str
     title: str
-    collector_number: str
+    collector_number: str | None
     variants: list[Variant]
 
     class Config:

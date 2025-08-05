@@ -1,4 +1,4 @@
-""" A class that scrapes a URL for info """
+"""A class that scrapes a URL for info"""
 
 from dataclasses import dataclass
 from stores.store import Store, StockedCard, CardSearchFailure
@@ -7,6 +7,9 @@ from typing import Optional
 from cards.card import Card
 from datetime import datetime
 import httpx
+import ssl
+import os
+import certifi
 
 
 @dataclass
@@ -33,7 +36,21 @@ class Scraper(Store):
         return None
 
     def get_page(self, url: str) -> Optional[str]:
-        with httpx.Client() as client:
+        ssl_context = ssl.SSLContext(protocol=ssl.PROTOCOL_TLS_CLIENT)
+        ssl_context.minimum_version = ssl.TLSVersion.TLSv1_3
+        ssl_context.maximum_version = ssl.TLSVersion.TLSv1_3
+        ssl_context.load_verify_locations(
+            cafile=os.path.relpath(certifi.where()), capath=None, cadata=None
+        )
+        with httpx.Client(
+            http1=True,
+            headers={
+                "User-Agent": "PostmanRuntime/7.45.0",
+                "Referer": url,
+            },
+            verify=ssl_context,
+        ) as client:
+
             try:
                 response = client.get(url)
                 response.raise_for_status()
@@ -48,3 +65,9 @@ class Scraper(Store):
 
             except httpx.HTTPError as exc:
                 raise CardSearchFailure from exc
+
+
+# curl --location 'https://mtgmate.com.au/cards/Adagia,_Windswept_Bastion/EOE/250' \
+# -A 'PostmanRuntime/7.45.0' \
+# --header 'Referer: https://mtgmate.com.au/cards/Adagia,_Windswept_Bastion/EOE/250' \
+# -I -v --tls13-ciphers 'TLS_AES_128_GCM_SHA256' --tlsv1.3 --http1.1
