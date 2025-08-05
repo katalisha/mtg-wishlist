@@ -6,9 +6,9 @@ authors = ["Kate Lanyon"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.13"
 httpx = "^0.28.1"
-pydantic = "^1.10.9"
+pydantic = "^2.11.7"
 lxml = "^6.0.0"
 
 [tool.pytest.ini_options]
@@ -16,9 +16,9 @@ pythonpath = "src"
 
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"
-pytest = "^7.3.1"
-lxml-stubs = "^0.4.0"
-pylint = "^2.17.4"
+pytest = "^8.4.1"
+lxml-stubs = "^0.5.1"
+pylint = "^3.3.7"
 
 [build-system]
 requires = ["poetry-core"]
