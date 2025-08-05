@@ -1,4 +1,5 @@
-""" MTG Mate Scraper Helper """
+"""MTG Mate Scraper Helper"""
+
 from cards.card import Card
 from decimal import Decimal
 from lxml import html
@@ -10,7 +11,7 @@ class MtgMateScraperHelper(ScraperHelper):
     """Scraper helper for scraping mtgmate.com"""
 
     def url(self, card: Card) -> str:
-        url_name = card.name.replace(" ", "_")
+        url_name = card.name.replace(" ", "_").replace("&", "%26")
         foil = ":foil" if card.printing == "Foil" else ""
         return f"https://www.mtgmate.com.au/cards/{url_name}/{card.set_code}/{card.number}{foil}"
 
