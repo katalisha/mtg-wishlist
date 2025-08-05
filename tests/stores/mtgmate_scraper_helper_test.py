@@ -1,4 +1,4 @@
-""" test the scraper class """
+"""test the scraper class"""
 
 from cards.card import Card
 from stores.mtgmate_scraper_helper import MtgMateScraperHelper
@@ -22,6 +22,23 @@ def test_foil():
     url = helper.url(card)
 
     assert url == "https://www.mtgmate.com.au/cards/Boros_Guildgate/GRN/243:foil"
+
+
+def test_ampersand():
+    card = Card(
+        "Ishgard, the Holy See // Faith & Grief",
+        "FIN",
+        "Final Fantasy",
+        "283",
+        "Normal",
+    )
+    helper = MtgMateScraperHelper()
+    url = helper.url(card)
+
+    assert (
+        url
+        == "https://www.mtgmate.com.au/cards/Ishgard,_the_Holy_See_//_Faith_%26_Grief/FIN/283"
+    )
 
 
 def test_stock_xpath():
