@@ -33,3 +33,5 @@ Name,URL
 "Tabernacle","https://tabernacle-games.myshopify.com"
 "Plenty of Games","https://plenty-of-games-au.myshopify.com"
 "Good Games","https://good-games-townhall.myshopify.com"
+"MTG Mate","https://www.mtgmate.com.au"
+"Cherry Collectables","https://kq0hnn.a.searchspring.io"

@@ -52,7 +52,7 @@ class SearchSpringStore(Store):
         return {
             "siteId": self.site_id,
             "bgfilter.collection_handle": ["magic-the-gathering-singles", "in-stock"],
-            "filter.collection_handle": re.sub("\W+", "-", card.set_name.casefold()),
+            "filter.collection_handle": re.sub("\\W+", "-", card.set_name.casefold()),
             "q": f"{card.name}",
             "resultsFormat": "native",
         }

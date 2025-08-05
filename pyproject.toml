@@ -7,15 +7,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-httpx = "^0.24.1"
+httpx = "^0.28.1"
 pydantic = "^1.10.9"
-lxml = "^4.9.2"
+lxml = "^6.0.0"
 
 [tool.pytest.ini_options]
 pythonpath = "src"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
+black = "^25.1.0"
 pytest = "^7.3.1"
 lxml-stubs = "^0.4.0"
 pylint = "^2.17.4"

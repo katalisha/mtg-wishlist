@@ -1,5 +1,4 @@
-## FROM --platform=linux/amd64 python:3.11.3-slim-bullseye 
-FROM python:3.11.3-slim-bullseye 
+FROM python:3
 
 RUN apt update && \
     apt install -y sudo
