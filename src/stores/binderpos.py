@@ -1,8 +1,8 @@
-""" A Store hosted on binderpos.com and the json models required to interact with the API """
+"""A Store hosted on binderpos.com and the json models required to interact with the API"""
 
 from cards.card import Card, Printing
 from pydantic import BaseModel
-from typing import Any, ClassVar, Optional
+from typing import Any, ClassVar
 from decimal import Decimal
 import httpx
 from time import sleep
@@ -39,11 +39,11 @@ class BinderStore(Store):
 
     url: str
 
-    requests_blocked_until: ClassVar[Optional[datetime]] = None
+    requests_blocked_until: ClassVar[datetime | None] = None
     binder_url = "https://portal.binderpos.com/external/shopify/products/forStore"
     avoid_rate_limit = 4  # seconds
 
-    def perform_search_for_card(self, card: Card) -> Optional[StockedCard]:
+    def perform_search_for_card(self, card: Card) -> StockedCard | None:
         if self.rate_limited_to() is not None:
             raise CardSearchFailure
 
@@ -54,7 +54,7 @@ class BinderStore(Store):
             return None
         else:
             matching_prices = [
-                min([v.price for v in p.variants])
+                min(v.price for v in p.variants)
                 for p in inventory.products
                 if p.collector_number == card.number
             ]
@@ -63,7 +63,7 @@ class BinderStore(Store):
                 min_price = min(matching_prices)
                 return StockedCard(card, min_price)
 
-    def get_inventory(self, card: Card) -> Optional[Inventory]:
+    def get_inventory(self, card: Card) -> Inventory | None:
         data = self.build_request_data(card)
 
         with httpx.Client() as client:
@@ -106,14 +106,14 @@ class BinderStore(Store):
                     seconds=retry_after
                 )
 
-    def rate_limited_to(self) -> Optional[datetime]:
+    def rate_limited_to(self) -> datetime | None:
         if (
             BinderStore.requests_blocked_until is not None
             and BinderStore.requests_blocked_until > datetime.now()
         ):
             return BinderStore.requests_blocked_until
 
-    def printing_to_variant(self, printing: Printing) -> list[str]:
+    def printing_to_variant(self, printing: Printing | None) -> list[str]:
         if printing == "Foil":
             return ["Near Mint Foil"]
         else:

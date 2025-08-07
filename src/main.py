@@ -1,18 +1,18 @@
 """Magic card wishlist checker - lets find those cards 🤑"""
 
-from cliargs import process_args, Namespace
+from cliargs import process_args, Args
 from renderer import Renderer
 from cards.wishlist import load_cards
 from stores.store_list import load_stores
 from stores.store import CardSearchFailure
 
-# TODO https://www.cherrycollectables.com.au
 # TODO try mypy
 # TODO linter docstring rules is leading to duplication for files that contain a single class
 
 
-def main(args: Namespace):
+def main(args: Args):
     wishlist = load_cards(args.wishlist)
+    hard_to_find = [] if args.htf is None else load_cards(args.htf)
     stores = load_stores(args.storelist)
     render = Renderer(args.verbose)
     total_cards = len(wishlist)
@@ -29,7 +29,7 @@ def main(args: Namespace):
                 has_errors = True
                 render.card_search_error(store.name, str(exc.__cause__))
 
-    render.done(stores)
+    render.done(stores, hard_to_find)
 
     for store in stores:
         limit = store.rate_limited_to()

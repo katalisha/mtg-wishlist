@@ -3,10 +3,14 @@ It is a cli program that takes an exported [dragonshield](https://mtg.dragonshie
 It runs in a dev container but now it's probably easier to run locally using poetry.
 
 # Usage
-`poetry run python src/main.py -w wishlist.csv -s stores.csv`
+`poetry run python src/main.py -w wishlist.csv -s stores.csv -f hard-to-find.csv -v`
 
 # Running tests
 `poetry run pytest`
+`poetry run pytest --cov=src`
+
+# Running linter
+`poetry run pylint --recursive=y src`
 
 # To run the environment
 1. Download [Docker desktop](https://www.docker.com/products/docker-desktop/)
@@ -35,3 +39,9 @@ Name,URL
 "Good Games","https://good-games-townhall.myshopify.com"
 "MTG Mate","https://www.mtgmate.com.au"
 "Cherry Collectables","https://kq0hnn.a.searchspring.io"
+
+## hard to find csv format
+Will highlight hard to find cards in the results, copy lines from wishlist
+Quantity,Card Name,Set Code,Set Name,Card Number,Condition,Printing,Language,LOW,MID,MARKET
+1,"Ao, the Dawn Sky",NEO,Kamigawa: Neon Dynasty,406,NearMint,Normal,English,3.20,5.20,5.02
+1,Golgari Guildgate,GRN,Guilds of Ravnica,248,NearMint,Foil,English,0.44,0.60,0.62

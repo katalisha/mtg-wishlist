@@ -1,11 +1,10 @@
-""" convert the csv file of stores to a list of stores"""
+"""convert the csv file of stores to a list of stores"""
 
 from util.fileio import process_csv_file
 from stores.store import Store
 from stores.binderpos import BinderStore
 from stores.scraper import Scraper
 from stores.search_spring import SearchSpringStore
-from typing import Optional
 from stores.mtgmate_scraper_helper import MtgMateScraperHelper
 from enum import Enum
 
@@ -20,7 +19,7 @@ def load_stores(filepath: str) -> list[Store]:
     return process_csv_file(filepath, convert_row_to_store)
 
 
-def convert_row_to_store(row: dict[str, str]) -> Optional[Store]:
+def convert_row_to_store(row: dict[str, str]) -> Store | None:
     if len(row) != 2:
         return None
 

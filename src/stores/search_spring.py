@@ -1,8 +1,8 @@
-""" A Store hosted on searchspring.com and the json models required to interact with the API """
+"""A Store hosted on searchspring.com and the json models required to interact with the API"""
 
 from cards.card import Card
 from pydantic import BaseModel
-from typing import Any, Optional
+from typing import Any
 from decimal import Decimal
 import httpx
 from stores.store import Store, StockedCard, CardSearchFailure
@@ -40,7 +40,7 @@ class SearchSpringStore(Store):
             raise ValueError
         self.site_id = components.hostname.split(".")[0]
 
-    def perform_search_for_card(self, card: Card) -> Optional[StockedCard]:
+    def perform_search_for_card(self, card: Card) -> StockedCard | None:
         inventory = self.get_inventory(card)
 
         if not inventory.products:
@@ -74,7 +74,7 @@ class SearchSpringStore(Store):
 
     def validate_inventory(
         self, card: Card, inventory: Inventory
-    ) -> Optional[StockedCard]:
+    ) -> StockedCard | None:
         def is_foil_product(product: Product) -> bool:
             return product.collection_handle.count("foil") > 0
 
@@ -99,5 +99,5 @@ class SearchSpringStore(Store):
         except ValueError:
             return None
 
-    def rate_limited_to(self) -> Optional[datetime]:
+    def rate_limited_to(self) -> datetime | None:
         return None

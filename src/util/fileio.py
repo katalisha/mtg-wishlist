@@ -1,8 +1,8 @@
-""" open a csv and process it with a generic function"""
+"""open a csv and process it with a generic function"""
 
 import csv
 import sys
-from typing import TypeVar, Callable, Optional
+from typing import TypeVar, Callable
 
 T = TypeVar("T")
 
@@ -17,7 +17,7 @@ class FileReport:
 
 def process_csv_file(
     filepath: str,
-    processor: Callable[[dict[str, str]], Optional[T]],
+    processor: Callable[[dict[str, str]], T | None],
     skip_header_lines: int = 0,
 ) -> list[T]:
     result_list: list[T] = []
