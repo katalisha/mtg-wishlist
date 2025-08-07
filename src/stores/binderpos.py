@@ -54,7 +54,7 @@ class BinderStore(Store):
             return None
         else:
             matching_prices = [
-                min([v.price for v in p.variants])
+                min(v.price for v in p.variants)
                 for p in inventory.products
                 if p.collector_number == card.number
             ]
