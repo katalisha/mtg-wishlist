@@ -8,6 +8,9 @@ It runs in a dev container but now it's probably easier to run locally using poe
 # Running tests
 `poetry run pytest`
 
+# Running linter
+`poetry run pylint --recursive=y src/`
+
 # To run the environment
 1. Download [Docker desktop](https://www.docker.com/products/docker-desktop/)
 2. Download [vscode](https://code.visualstudio.com)
