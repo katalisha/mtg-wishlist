@@ -29,11 +29,12 @@
 				"python.linting.enabled": true,
 				"python.linting.pylintEnabled": true,
 				"python.formatting.blackPath": "/usr/local/py-utils/bin/black",
-				"python.linting.pylintPath": "/home/nonroot/.cache/pypoetry/virtualenvs/mtg-l6UIBDnu-py3.11/bin/pylint",
+				"python.linting.pylintPath": "/home/nonroot/.cache/pypoetry/virtualenvs/mtg-l6UIBDnu-py3.13/bin/pylint",
 				"python.linting.lintOnSave": true,
 				"python.linting.pylintArgs": [
 					"--rcfile=.pylintrc"
 				],
+				"pylint.importStrategy": "fromEnvironment",
 				"python.analysis.typeCheckingMode": "strict",
 				"python.formatting.provider": "black",
 				"[python]": {

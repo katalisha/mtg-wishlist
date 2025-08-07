@@ -3,7 +3,7 @@ It is a cli program that takes an exported [dragonshield](https://mtg.dragonshie
 It runs in a dev container but now it's probably easier to run locally using poetry.
 
 # Usage
-`poetry run python src/main.py -w wishlist.csv -s stores.csv -f hard-to-find.csv`
+`poetry run python src/main.py -w wishlist.csv -s stores.csv -f hard-to-find.csv -v`
 
 # Running tests
 `poetry run pytest`
