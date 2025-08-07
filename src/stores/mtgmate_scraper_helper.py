@@ -3,7 +3,6 @@
 from cards.card import Card
 from decimal import Decimal
 from lxml import html
-from typing import Optional
 from stores.scraper_helper import ScraperHelper
 
 
@@ -26,7 +25,7 @@ class MtgMateScraperHelper(ScraperHelper):
                     return int(stock[0])
         return 0
 
-    def find_price(self, result: str) -> Optional[Decimal]:
+    def find_price(self, result: str) -> Decimal | None:
         tree = html.fromstring(result)  # type: ignore
         price = tree.xpath('//tr[@class="magic-card"]/td[@class="price"]/text()')
 

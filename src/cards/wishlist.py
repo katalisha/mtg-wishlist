@@ -2,14 +2,14 @@
 
 from util.fileio import process_csv_file
 from cards.card import Card, Printing
-from typing import cast, get_args, Optional
+from typing import cast, get_args
 
 
 def load_cards(filepath: str) -> list[Card]:
     return process_csv_file(filepath, convert_row_to_card, 1)
 
 
-def convert_row_to_card(row: dict[str, str]) -> Optional[Card]:
+def convert_row_to_card(row: dict[str, str]) -> Card | None:
     if len(row) != 11:
         return None
 

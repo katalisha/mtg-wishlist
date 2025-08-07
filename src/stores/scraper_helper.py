@@ -1,7 +1,7 @@
-""" abstract scraper helper class """
+"""abstract scraper helper class"""
+
 from cards.card import Card
 from abc import ABC, abstractmethod
-from typing import Optional
 from decimal import Decimal
 
 
@@ -17,5 +17,5 @@ class ScraperHelper(ABC):
         pass
 
     @abstractmethod
-    def find_price(self, result: str) -> Optional[Decimal]:
+    def find_price(self, result: str) -> Decimal | None:
         pass

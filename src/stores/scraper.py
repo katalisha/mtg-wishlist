@@ -3,7 +3,6 @@
 from dataclasses import dataclass
 from stores.store import Store, StockedCard, CardSearchFailure
 from stores.scraper_helper import ScraperHelper
-from typing import Optional
 from cards.card import Card
 from datetime import datetime
 import httpx
@@ -18,7 +17,7 @@ class Scraper(Store):
 
     helper: ScraperHelper
 
-    def perform_search_for_card(self, card: Card) -> Optional[StockedCard]:
+    def perform_search_for_card(self, card: Card) -> StockedCard | None:
         url = self.helper.url(card)
         try:
             result = self.get_page(url)
@@ -32,10 +31,10 @@ class Scraper(Store):
         except CardSearchFailure as exc:
             raise exc
 
-    def rate_limited_to(self) -> Optional[datetime]:
+    def rate_limited_to(self) -> datetime | None:
         return None
 
-    def get_page(self, url: str) -> Optional[str]:
+    def get_page(self, url: str) -> str | None:
         ssl_context = ssl.SSLContext(protocol=ssl.PROTOCOL_TLS_CLIENT)
         ssl_context.minimum_version = ssl.TLSVersion.TLSv1_3
         ssl_context.maximum_version = ssl.TLSVersion.TLSv1_3
