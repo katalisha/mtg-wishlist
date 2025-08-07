@@ -1,4 +1,4 @@
-""" convert the wishlist csv to a list of Cards"""
+"""convert the wishlist csv to a list of Cards"""
 
 from util.fileio import process_csv_file
 from cards.card import Card, Printing
@@ -15,7 +15,7 @@ def convert_row_to_card(row: dict[str, str]) -> Optional[Card]:
 
     try:
         if row["Printing"] not in get_args(Printing):
-            printing = ""
+            printing = None
         else:
             printing = cast(Printing, row["Printing"])
 

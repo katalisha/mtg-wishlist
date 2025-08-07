@@ -1,4 +1,4 @@
-""" A Store hosted on binderpos.com and the json models required to interact with the API """
+"""A Store hosted on binderpos.com and the json models required to interact with the API"""
 
 from cards.card import Card, Printing
 from pydantic import BaseModel
@@ -113,7 +113,7 @@ class BinderStore(Store):
         ):
             return BinderStore.requests_blocked_until
 
-    def printing_to_variant(self, printing: Printing) -> list[str]:
+    def printing_to_variant(self, printing: Printing | None) -> list[str]:
         if printing == "Foil":
             return ["Near Mint Foil"]
         else:

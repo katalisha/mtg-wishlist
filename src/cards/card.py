@@ -1,4 +1,4 @@
-""" A Magic Card """
+"""A Magic Card"""
 
 from typing import Literal
 from dataclasses import dataclass
@@ -12,4 +12,4 @@ class Card:
     set_code: str
     set_name: str
     number: str
-    printing: Printing
+    printing: Printing | None
